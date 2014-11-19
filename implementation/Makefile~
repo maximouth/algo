@@ -1,0 +1,127 @@
+
+GCC=gcc
+GPP=g++
+
+#FLAGS=-Wall -g -D DEBUG
+FLAGS=-Wall -g 
+GCCFLAGS=  -g
+CPPFLAGS= -D DEBUG
+LIBS= -lm
+
+# User definitions must be here
+EXEC = Projet_ex1.x
+INCS = entree_sortie.h chaine.h fplot.h
+SOURCES = entree_sortie.c chaine.c fplot.c main_ex1.c
+OBJS = $(SOURCES:.c=.o)
+# User definitions must be here
+EXEC2 = Projet_ex2.x
+INCS2 = entree_sortie.h fplot.h reseau.h
+SOURCES2 = entree_sortie.c fplot.c reseau.c main_ex2.c
+OBJS2 = $(SOURCES2:.c=.o)
+
+# User definitions must be here
+EXEC3 = Projet_ex3.x 
+INCS3 = entree_sortie.h fplot.h reseau.h hachage.h chaine.h
+SOURCES3 = entree_sortie.c fplot.c reseau.c hachage.c chaine.c main_ex3.c
+OBJS3 = $(SOURCES3:.c=.o)
+
+# User definitions must be here
+EXEC4 = Projet_ex4.x 
+INCS4 = entree_sortie.h fplot.h reseau.h hachage.h chaine.h arbre.h
+SOURCES4 = entree_sortie.c fplot.c reseau.c hachage.c chaine.c arbre.c main_ex4.c
+OBJS4 = $(SOURCES4:.c=.o)
+
+# User definitions must be here
+EXEC5 = Projet_ex5.x 
+INCS5 = entree_sortie.h fplot.h reseau.h hachage.h chaine.h arbre.h
+SOURCES5 = entree_sortie.c fplot.c reseau.c hachage.c chaine.c arbre.c main_ex5.c
+OBJS5 = $(SOURCES5:.c=.o)
+
+# User definitions must be here
+EXEC6 = Projet.x 
+INCS6 = entree_sortie.h fplot.h reseau.h hachage.h chaine.h arbre.h tas.h tas_dijkstra.h dijkstra.h 
+SOURCES6 = entree_sortie.c fplot.c reseau.c hachage.c chaine.c arbre.c tas.h  tas_dijkstra.c dijkstra.c  main_ex.c
+OBJS6 = $(SOURCES6:.c=.o)
+
+# User definitions must be here
+EXEC7 = Projet_ex6.x 
+INCS7 = entree_sortie.h fplot.h reseau.h hachage.h chaine.h arbre.h tas.h
+SOURCES7 = entree_sortie.c fplot.c reseau.c hachage.c chaine.c arbre.c tas.c main_ex6.c
+OBJS7 = $(SOURCES7:.c=.o)
+
+# User definitions must be here
+EXEC8 = Projet_ex7.x 
+INCS8 = entree_sortie.h fplot.h reseau.h hachage.h chaine.h arbre.h tas_dijkstra.h dijkstra.h
+SOURCES8 = entree_sortie.c fplot.c reseau.c hachage.c chaine.c arbre.c tas_dijkstra.c dijkstra.c main_ex7.c
+OBJS8 = $(SOURCES8:.c=.o)
+
+# User definitions must be here
+EXEC9 = Projet_ex7_1.x 
+INCS9 = entree_sortie.h  evaluation.h chaine.h
+SOURCES9 = entree_sortie.c  evaluation.c fplot.c chaine.c main_ex7_1.c
+OBJS9 = $(SOURCES9:.c=.o)
+
+# Building the world
+all: $(EXEC) $(EXEC2) $(EXEC3) $(EXEC4) $(EXEC5) $(EXEC6) $(EXEC7) $(EXEC8) $(EXEC9)
+
+$(EXEC): $(INCS) $(OBJS) 
+	$(GCC) $(GCCFLAGS) $(OBJS) $(LIBS) -o $(EXEC) 
+
+$(EXEC2): $(INCS2) $(OBJS2) 
+	$(GCC) $(GCCFLAGS) $(OBJS2) $(LIBS) -o $(EXEC2) 
+
+$(EXEC3): $(INCS3) $(OBJS3) 
+	$(GCC) $(GCCFLAGS) $(OBJS3) $(LIBS) -o $(EXEC3) 
+
+$(EXEC4): $(INCS4) $(OBJS4) 
+	$(GCC) $(GCCFLAGS) $(OBJS4) $(LIBS) -o $(EXEC4)
+
+$(EXEC5): $(INCS5) $(OBJS5) 
+	$(GCC) $(GCCFLAGS) $(OBJS5) $(LIBS) -o $(EXEC5)
+
+$(EXEC6): $(INCS6) $(OBJS6) 
+	$(GCC) $(GCCFLAGS) $(OBJS6) $(LIBS) -o $(EXEC6) 
+
+$(EXEC7): $(INCS7) $(OBJS7) 
+	$(GCC) $(GCCFLAGS) $(OBJS7) $(LIBS) -o $(EXEC7)
+
+$(EXEC8): $(INCS8) $(OBJS8) 
+	$(GCC) $(GCCFLAGS) $(OBJS8) $(LIBS) -o $(EXEC8) 
+
+$(EXEC9): $(INCS9) $(OBJS9) 
+	$(GCC) $(GCCFLAGS) $(OBJS9) $(LIBS) -o $(EXEC9) 
+
+
+
+.SUFFIXES:
+.SUFFIXES: .c .cc .o
+
+.cc.o:
+	$(GPP) $(FLAGS) -c $<
+
+.c.o:
+	$(GCC) $(FLAGS) -c $<
+
+
+# Clean up
+clean:
+	rm -f *~ .*~ \#*\# *.o *.tmp* Chaine*.txt *.png *.plt Reseau*.txt
+	rm -f $(EXEC) $(EXEC2) $(EXEC3) $(EXEC4) $(EXEC5) 
+	rm -f $(EXEC6) $(EXEC7) $(EXEC8) $(EXEC9)
+
+# Dependencies
+depend: 
+	$(GCC) -M $(CPPFLAGS) $(SOURCES) > .depend
+	$(GCC) -M $(CPPFLAGS) $(SOURCES2) >> .depend
+	$(GCC) -M $(CPPFLAGS) $(SOURCES3) >> .depend
+	$(GCC) -M $(CPPFLAGS) $(SOURCES4) >> .depend
+	$(GCC) -M $(CPPFLAGS) $(SOURCES5) >> .depend
+	$(GCC) -M $(CPPFLAGS) $(SOURCES6) >> .depend
+	$(GCC) -M $(CPPFLAGS) $(SOURCES7) >> .depend
+	$(GCC) -M $(CPPFLAGS) $(SOURCES8) >> .depend
+	$(GCC) -M $(CPPFLAGS) $(SOURCES9) >> .depend
+
+include .depend
+
+
+

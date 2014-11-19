@@ -1,0 +1,27 @@
+#ifndef _GRAPH_H
+#define _GRAPH_H
+
+typedef enum {true, false} boolean;
+
+
+typedef struct voisin {
+  char *nom
+  boolean term;
+  int cout;
+  struct arrete *suiv;
+} Voisin;
+
+
+typedef struct point {
+  char *nom;
+  arrete *voisin;
+} Point;
+
+
+typedef struct graph {
+  int size;
+  Point **arrete;
+} Graph;
+
+
+#endif

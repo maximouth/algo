@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "graph.h"
+
+// creer un arrete terminal
+Voisin *creerArrete(char *nom) {
+
+  Voisin *new = NULL;
+  new = malloc (sizeof (Arrete));
+
+  new->nom = nom;
+  new->cout = 0;
+  new->suiv = NULL;
+
+  return new;
+}
+
+
+//creer un Point terminal
+Point *creerPointTerm(char *nom) {
+
+  Point *new= NULL;
+  new = malloc (sizeof(Point));
+
+  new->
+}
+
+
+// creer un graph de taille size
+Graph *creerGraph(int size) {
+  int i = 0;
+  Graph *new = NULL;
+  new = malloc (sizeof (Graph));
+
+  new->size = size;
+
+  for (i = 0; i< size ; i++) {
+    new->Point[i] = malloc (sizeof (Point));
+    new->Point[i] = creerNewPoint;
+  }
+
+  return new;
+}
+
+void ajouterPoint (Graph *g, Voisin *p) {
+  g->Point[g->size] = malloc (sizeof(Point));
+  g->Point[g->size] = p; 
+}
+
+boolean appartient (Graph *g, Voisin *p) {
+
+  return true;
+
+} 
