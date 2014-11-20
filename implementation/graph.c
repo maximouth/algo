@@ -26,6 +26,9 @@ Point *creerPointTerm() {
 
   new->nom = NULL;
   new->term = true;
+  new->x = 0;
+  new->y = 0;
+
   new->voisin = NULL;
   printf("point terminal crée\n");
   return new;
@@ -39,6 +42,8 @@ Point *creerPointNonTerm() {
 
   new->nom = NULL;
   new->term = false;
+  new->x = 0;
+  new->y = 0;
   new->voisin = NULL;
 
     printf("point non terminal crée\n");
@@ -69,8 +74,10 @@ Graph *creerGraph(int size) {
 }
 
 //initialise le champ nom d'un point
-void initPoint(Point *p, char *nom) {
+void initPoint(Point *p, char *nom, int x, int y) {
   p->nom = strdup(nom);
+  p-> x = x;
+  p-> y = y;
   printf("point initialisé avec %s\n", nom);
 }
 

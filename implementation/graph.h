@@ -14,6 +14,8 @@ typedef struct voisin {
 typedef struct point {
   boolean term;
   char *nom;
+  int x;
+  int y;
   Voisin *voisin;
 } Point;
 
@@ -30,7 +32,9 @@ Point *creerPointTerm();
 Point *creerPointNonTerm();
 Graph *creerGraph(int size);
 
-void initPoint(Point *p, char *nom);
+
+
+void initPoint(Point *p, char *nom, int x, int y);
 void initVoisin(Voisin *v, char *nom, int cout);
 
 boolean appartient (Graph *g, Point *p);

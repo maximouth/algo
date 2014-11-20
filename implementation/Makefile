@@ -10,8 +10,8 @@ LIBS= -lm
 
 # User definitions must be here
 EXEC = Projet_ex.x
-INCS = graph.h
-SOURCES = graph.c main.c
+INCS = graph.h entree_sortie.h lectGraph.h
+SOURCES = graph.c main.c entree_sortie.c lectGraph.c
 OBJS = $(SOURCES:.c=.o)
 
 
