@@ -19,9 +19,27 @@ typedef struct point {
 
 
 typedef struct graph {
+  int max;
   int size;
-  Point **Point;
+  Point *Point[];
 } Graph;
+
+
+Voisin *creerArrete();
+Point *creerPointTerm();
+Point *creerPointNonTerm();
+Graph *creerGraph(int size);
+
+void initPoint(Point *p, char *nom);
+void initVoisin(Voisin *v, char *nom, int cout);
+
+boolean appartient (Graph *g, Point *p);
+Point *retourne(Graph *g, char *nom);
+int CoutArrete (Point *p1, Point *p2);
+
+void ajouterPoint (Graph *g, Point *p);
+
+
 
 
 #endif
