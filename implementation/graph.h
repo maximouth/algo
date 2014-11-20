@@ -38,8 +38,7 @@ Point *retourne(Graph *g, char *nom);
 int CoutArrete (Point *p1, Point *p2);
 
 void ajouterPoint (Graph *g, Point *p);
-
-
+void ajouterVoisin(Graph *g , Voisin *v, Point *p);
 
 
 #endif
