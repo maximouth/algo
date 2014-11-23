@@ -15,36 +15,40 @@
 
 
 void generateur(FILE *f, Graph *g) {
-  int i =0;
+  Point *p;
+  Voisin *v;
 
-
+  if(g == NULL) {
+    printf("generateur : Graphe vide.\n");
+    exit(0);
+  }
 
   fprintf(f,"graph g { \n\trankdir = LR\n\tbgcolor = grey50\nsize = \"1500\"\n");
   //xfprintf(f,"graph [bb=\"0,0,10000,10000\"]");
-  fprintf(f,"\tnode [\n\tfrontsize = \"0.001\"\n\tstyle = \"rounded, filled\"\n\t]\n\n");
+  //fprintf(f,"\tnode [\n\tfrontsize = \"0.001\"\n\tstyle = \"rounded, filled\"\n\t]\n\n");
   
-  for (i = 0; i< g->size ; i++) {
-    fprintf(f,"\tmyNode%d [\n",i);
-    fprintf(f,"\tlabel = \"%s\"\n",g->Point[i]->nom);
+  p = g->points;
+  while( p != NULL) {
+    fprintf(f,"\tmyNode%s [\n",p->nom);
+    fprintf(f,"\tlabel = \"%s\"\n",p->nom);
     fprintf(f,"\tcolor = blue\n");
-    fprintf(f,"\tpos = \"%d,%d\"\n",g->Point[i]->x,g->Point[i]->y);
+    fprintf(f,"\tpos = \"%d,%d\"\n",p->x, p->y);
     fprintf(f,"\t]\n\n");
+    p = p->suivant;
     }
   
-  
-  for (i = 0; i< g->size ; i++) {
-    while (g->Point[i]->voisin) {
-
-      if (atoi(g->Point[i]->voisin->nom) > atoi(g->Point[i]->nom)){
-
-      fprintf(f,"\"myNode%s\" -- \"myNode%s\" [ \tpenwidth = 0.001 \n\t color = red\n\tlabel = \"%d\" ]\n",g->Point[i]->nom,g->Point[i]->voisin->nom,g->Point[i]->voisin->cout );
+  p = g->points;
+  while( p != NULL) {
+    v = p->voisin;
+    while (v != NULL) {
+      if (atoi(p->nom) > atoi(v->point->nom)){
+	fprintf(f,"\"myNode%s\" -- \"myNode%s\" [ \tpenwidth = 0.001 \n\t color = red\n\tlabel = \"%d\" ]\n",p->nom, v->point->nom, v->cout );
       }
-    g->Point[i]->voisin = g->Point[i]->voisin->suiv;
-      
+      v = v->suivant;
     }
-    } 
+    p = p->suivant;
+  } 
   
-
 fprintf(f,"}");
 }
 

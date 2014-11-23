@@ -1,48 +1,42 @@
 #ifndef _GRAPH_H
 #define _GRAPH_H
 
-typedef enum {true, false} boolean;
-
-
-typedef struct voisin {
-  char *nom;
-  int cout;
-  struct voisin *suiv;
-} Voisin;
-
+typedef enum {false, true} boolean;
 
 typedef struct point {
   boolean term;
   char *nom;
   int x;
   int y;
-  Voisin *voisin;
+  struct voisin *voisin;
+  struct point *suivant;
 } Point;
 
+typedef struct voisin {
+  Point *point;
+  int cout;
+  struct voisin *suivant;
+} Voisin;
 
 typedef struct graph {
-  int max;
-  int size;
-  Point *Point[];
+  int nb_points;
+  int cout_max_arete;
+  Point *points;
 } Graph;
 
 
-Voisin *creerArrete();
-Point *creerPointTerm();
-Point *creerPointNonTerm();
-Graph *creerGraph(int size);
-
-
+Voisin *creerArete();
+Point *creerPoint();
+Graph *creerGraph(int nb_points, int nb_aretes);
 
 void initPoint(Point *p, char *nom, int x, int y);
-void initVoisin(Voisin *v, char *nom, int cout);
 
 boolean appartient (Graph *g, Point *p);
 Point *retourne(Graph *g, char *nom);
-int CoutArrete (Point *p1, Point *p2);
+int CoutArete (Point *p1, Point *p2);
 
 void ajouterPoint (Graph *g, Point *p);
-void ajouterVoisin(Graph *g , Voisin *v, Point *p);
+void ajouterVoisin(Point *p1, Point *p2, int cout);
 
 
 #endif

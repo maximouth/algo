@@ -22,31 +22,29 @@ Graph *lectGraph(FILE *f) {
   Graph *g = NULL;
   int taille = 10;
   char s [taille];
-  int nbPoint;
-  int nbArrete;
+  int nbPoints;
+  int nbAretes;
   Point *p = NULL;
+  Point *p2 = NULL;
   int cpt = 0;
   int tmp;
-  Voisin *v = NULL;
-  char *temp = NULL;
 
   //lire le nombre de points
   GetChaine(f, taille, s);
   printf("nb de point : %s\n",s);
-  nbPoint = atoi(s);
+  nbPoints = atoi(s);
   
-  // lire le nombre d'arrete
+  // lire le nombre d'arete
   GetChaine(f, taille, s);
   printf("nb d'arrretes : %s\n",s);
-  nbArrete = atoi(s);
+  nbAretes = atoi(s);
   
   //creation d'un graph de nbPoint points
-  g = creerGraph(nbPoint);
+  g = creerGraph(nbPoints, nbAretes);
   
   //tant qu'il y a des points a lire faire :
-  while (cpt < nbPoint) {
-    
-    p = creerPointTerm();
+  for(cpt = 0; cpt < nbPoints; cpt++) {    
+    p = creerPoint();
 
     //lire le nom du point
     GetChaine(f, taille, s);
@@ -59,10 +57,13 @@ Graph *lectGraph(FILE *f) {
     tmp = atoi(s);
     
     if (tmp == 0) {
-     p->term = false;
+      p->term = false;
+    }
+    else {
+     p->term = true;
     }
     
-    // recuperer les coordonées
+    // recuperer les coordonnees
     GetChaine(f, taille, s);
     printf("(%s,",s);
     tmp = atoi(s);
@@ -75,35 +76,27 @@ Graph *lectGraph(FILE *f) {
     p->y = tmp;
 
     ajouterPoint(g,p);
-    cpt++;
   }
 
   // maintenant lire les voisins et les ajouter
+  for(cpt = 0; cpt < nbAretes; cpt++) {
 
-  cpt = 0;
-  while (cpt < nbArrete) {
-    v = creerArrete();
-    
     //nom du premier point
     GetChaine(f, taille, s);
-    printf("arrete en %s et",s);
-    p = retourne (g , s);
+    printf("arete en %s et",s);
+    p = retourne (g, s);
 
     //nom du 2eme point
     GetChaine(f, taille, s);
-    printf(" %s",s);
-    temp = strdup(s);
+    printf("arete en %s et",s);
+    p2 = retourne (g, s);
 
-    //cout de l'arrete
+    //cout de l'arete
     GetChaine(f, taille, s);
     printf("et de cout :%s\n",s);
     tmp = atoi(s);
 
-    initVoisin(v ,temp, tmp);  
-
-    ajouterVoisin(g, v, p);
-
-    cpt++;
+    ajouterVoisin(p, p2, tmp);
   }
 
   return g;
