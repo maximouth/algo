@@ -1,0 +1,30 @@
+graph g {
+	
+		rankdir = LR
+		bgcolor= grey50
+	
+	node [
+		fontsize = "10"
+		shape = box
+		style = "rounded,filled"
+	]
+ 
+	myNode1 [
+		label = "Node One"
+		color = lightsalmon
+		fillcolor = grey75
+		pos = "0,0"
+	]
+	myNode2 [
+		label = "Node Two"
+		color = lightcoral
+		fillcolor = grey75
+		pos = "1,1"
+	]
+	
+ 
+	myNode1 -- myNode2 [ penwidth = 1, fontsize = 8, label = "Connection One" ]
+
+ 
+
+}

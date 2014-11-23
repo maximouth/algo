@@ -4,21 +4,22 @@
 
 #include "graph.h"
 #include "lectGraph.h"
-
+#include "generateurDot.h"
 
 int main(int argc, char *argv[]) {
 
   FILE *f=  NULL;
+  FILE *gr = NULL;
   char *nomfic;
   Graph *graph = NULL;
-  if(argc != 2) {
-    printf("Usage : Projet.x nom_fichier_entree\n");
+  if(argc != 3) {
+    printf("Usage : Projet.x nom_fichier_entree nom_du_graph\n");
     exit(1);
   } 
 
 /* Allocation pour le nom de fichier avec l'extension .tmp */
-nomfic = malloc(strlen(argv[1]));
-
+  nomfic = malloc(strlen(argv[1]));
+  
   /* Ouverture du fichier d'entrée */
   strcpy(nomfic, argv[1]);
   printf("nom fichier : %s\n", nomfic);
@@ -27,9 +28,15 @@ nomfic = malloc(strlen(argv[1]));
     printf("Impossible d'ouvrir le fichier : %s.\n", nomfic);
     exit(1);
   }
-
-graph = lectGraph(f);
-
+  
+  gr = fopen(argv[2],"w");
+  if (f== NULL) {
+    printf("Impossible d'ouvrir le fichier : %s.\n", argv[2]);
+    exit(1);
+  }
+  graph = lectGraph(f);
+  generateur(gr,graph);
+  //system("neato -Tps -o graph.ps test.dot");
 
   /*
   Point *p1 = creerPointTerm();
