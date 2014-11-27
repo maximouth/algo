@@ -1,6 +1,8 @@
 # ifndef __RESEAU_H__
 # define __RESEAU_H__
 
+#include <stdio.h>
+
 /* Liste chainee de noeuds */
 typedef struct cellNoeud {
   struct noeud * cour ;  /* Pointeur vers le noeud courant */

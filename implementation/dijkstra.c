@@ -3,13 +3,8 @@
 #include <string.h>
 #include <float.h>
 
-#include "chaine.h"
 #include "entree_sortie.h"
-#include "fplot.h"
 #include "reseau.h"
-#include "arbre.h"
-#include "reseau.h"
-#include "hachage.h"
 #include "dijkstra.h"
 
 int **tab;
@@ -119,38 +114,3 @@ void dijkstra(Tas *tas, Reseau *res, Noeud *deb) {
 }
 
 
-void extraitTas(Tas *tas, Chaines *ch, Noeud *fin)
-{
-  Elem *e = tas->val[fin->num];
-  CellChaine *cell;
-  CellPoint *p;
-
-  //creation de la nouvelle chaine
-  cell = creerCellchaine();
-  cell->numero = ch->nbChaines;
-  
-  while(e->precedent != -1) {
-    p = creerPoint();
-    p->suiv = cell->points;
-    cell->points = p;
-    p->x = e->noeud->x;
-    p->y = e->noeud->y;
-    
-    // trouver le noeud précédent
-    e = tas->val[e->precedent];
-  }
-  
-  // inserer le premier noeud
-  p = creerPoint();
-  p->suiv = cell->points;
-  cell->points = p;
-  p->x = e->noeud->x;
-  p->y = e->noeud->y;
-  
-  //chainer la chaine à la liste des chaines
-  cell->suiv = ch->chaines;
-  ch->chaines = cell;
-
-  //incrementer le nombre de chaine
-  ch->nbChaines++;
-}

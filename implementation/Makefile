@@ -12,9 +12,13 @@ LIBS= -lm
 EXEC = Projet_ex.x
 INCS = reseau.h \
 entree_sortie.h \
+tas_dijkstra.h \
+dijkstra.h
 
 SOURCES = reseau.c \
 entree_sortie.c \
+tas_dijkstra.c \
+dijkstra.c \
 main.c  
 
 OBJS = $(SOURCES:.c=.o)

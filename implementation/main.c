@@ -3,6 +3,8 @@
 #include <string.h>
 
 #include "reseau.h"
+#include "tas_dijkstra.h"
+#include "dijkstra.h"
 
 
 int main(int argc, char *argv[]) {
@@ -10,6 +12,10 @@ int main(int argc, char *argv[]) {
   FILE *f=  NULL;
   FILE *gr = NULL;
   Reseau *res = NULL;
+  Tas *tas;
+#ifdef DEBUG
+  int i;
+#endif
 
   if(argc != 3) {
     printf("Usage : Projet.x nom_fichier_entree nom_du_graph\n");
@@ -37,7 +43,21 @@ int main(int argc, char *argv[]) {
 
   /* Affichage en formt dot */
   ecrireReseauDot(res, gr);
-  //system("neato -Tps -o graph.ps test.dot");
+  //system("neato -s -Tps -o graph.ps test.dot");
+
+  //initialisation du tas à partir des noeuds du reseau
+  tas = initTas(res);
+
+  //creation du tas pour la premiere commodité
+  dijkstra(tas, res, res->noeuds->cour); 
+  
+#ifdef DEBUG
+    for(i = 0; i<res->nbNoeuds; i++) {
+      printf("%d.%d : %d -> %f\n", i, tas->val[i]->numero, 
+	     tas->val[i]->precedent, tas->val[i]->distance);
+    }
+#endif
+
 
   return 0;
 }
