@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <float.h>
+#include <limits.h>
 
 #include "entree_sortie.h"
 #include "reseau.h"
@@ -18,16 +18,9 @@ int **tab;
 /*   return(dist); */
 /* } */
 
-double calcDistance(Noeud *a, Noeud *b)
+int calcDistance(Noeud *a, CellNoeud *b)
 {
-  double dist;
-
-  dist = sqrt ( (b->x - a->x) * (b->x - a->x) + (b->y - a->y) * (b->y - a->y));
-
-  if(a->num < b->num)
-    return(((tab[a->num][b->num]+1)^2)*dist);
-  else
-    return(((tab[b->num][a->num]+1)^2)*dist);
+  return b->poids;
 }
 
 void initTab(int nbNoeuds)
@@ -64,7 +57,7 @@ Tas *initTas(Reseau *res)
 
   while(n != NULL) {
     e = creerElem();
-    remplirElem(e, n->cour, -1, FLT_MAX);
+    remplirElem(e, n->cour, -1, INT_MAX);
     inserer(t, e);
     n = n->suiv;
   }
@@ -77,10 +70,10 @@ void dijkstra(Tas *tas, Reseau *res, Noeud *deb) {
 
   Elem *e;
   CellNoeud *voisin;
-  double distance;
+  int poids;
 
   //mettre le noeud de départ à la racine du tas
-  tas->val[deb->num]->distance = 0.0;
+  tas->val[deb->num]->poids = 0;
   miseAJour(tas, tas->val[deb->num]);
   
   while(!tasVide(tas)) {
@@ -94,10 +87,10 @@ void dijkstra(Tas *tas, Reseau *res, Noeud *deb) {
     voisin = e->noeud->voisins;
     while(voisin != NULL) {
       //calcul de la distance entre le noeud et son voisin
-      distance = calcDistance(e->noeud, voisin->cour);
+      poids = calcDistance(e->noeud, voisin);
 
-      if(e->distance+distance < tas->val[voisin->cour->num]->distance) {
-	tas->val[voisin->cour->num]->distance = e->distance+distance;
+      if(e->poids+poids < tas->val[voisin->cour->num]->poids) {
+	tas->val[voisin->cour->num]->poids = e->poids+poids;
 	tas->val[voisin->cour->num]->precedent = e->numero;
 	miseAJour(tas, tas->val[voisin->cour->num]);
 	if(e->noeud->num < voisin->cour->num) {

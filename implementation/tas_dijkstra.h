@@ -7,7 +7,7 @@
 typedef struct elem {
   int numero;
   int precedent;
-  double distance;
+  int poids;
   Noeud *noeud;
   int posTas;
 } Elem;
@@ -25,7 +25,7 @@ typedef struct tas {
 
 Elem *creerElem();
 Tas *creerTas(int taille);
-void remplirElem(Elem *el, Noeud *n, int precedent, double dist);
+void remplirElem(Elem *el, Noeud *n, int precedent, int poids);
 
 void inserer(Tas *t, Elem *el);
 void supprimer(Tas *t, int idx);

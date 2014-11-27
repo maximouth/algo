@@ -40,24 +40,31 @@ int main(int argc, char *argv[]) {
 
   /* Lecture du reseau */
   res = lectureReseau(f);
+  printf("Lecture reseau terminé.\n");
 
   /* Affichage en formt dot */
   ecrireReseauDot(res, gr);
+  printf("Ecriture fichier dot terminé.\n");
   //system("neato -s -Tps -o graph.ps test.dot");
 
   //initialisation du tas à partir des noeuds du reseau
   tas = initTas(res);
+  printf("Initialisation du tas terminée.\n");
+
+#ifdef DEBUG
+  afficher(tas);
+#endif
 
   //creation du tas pour la premiere commodité
   dijkstra(tas, res, res->noeuds->cour); 
+  printf("Calcul dijkstra terminée.\n");
   
 #ifdef DEBUG
     for(i = 0; i<res->nbNoeuds; i++) {
-      printf("%d.%d : %d -> %f\n", i, tas->val[i]->numero, 
-	     tas->val[i]->precedent, tas->val[i]->distance);
+      printf("%d.%d : %d -> %d\n", i, tas->val[i]->numero, 
+	     tas->val[i]->precedent, tas->val[i]->poids);
     }
 #endif
-
 
   return 0;
 }

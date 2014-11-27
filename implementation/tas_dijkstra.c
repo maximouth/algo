@@ -17,7 +17,7 @@ Elem *creerElem()
   //initialisation de sommet et clef a une valeur null;
   el->numero = -1;
   el->precedent = -1;
-  el->distance = 0.0;
+  el->poids = 0;
   el->noeud = NULL;
   el->posTas = -1;
   
@@ -56,21 +56,21 @@ Tas *creerTas(int taille) {
 }
 
 /* initialiser un element avec les valeurs passées en arguments */
-void remplirElem(Elem *el, Noeud *n, int precedent, double dist) {
+void remplirElem(Elem *el, Noeud *n, int precedent, int poids) {
   el->numero = n->num;
   el->precedent = precedent;
-  el->distance = dist;
+  el->poids = poids;
   el->noeud = n;
   
 #ifdef DEBUG
-  printf("remplissage de l'élement avec num %d, prec %d et %.2f\n", 
-	 n->num , precedent, dist);
+  printf("remplissage de l'élement avec num %d, prec %d et %d\n", 
+	 n->num , precedent, poids);
 #endif
 }
 
 int compare(Tas *t, int i, int p)
 {
-  return (t->val[t->tas[i]]->distance < t->val[t->tas[p]]->distance);
+  return (t->val[t->tas[i]]->poids < t->val[t->tas[p]]->poids);
 }
 
 /* inserer un nouvel element dans le tas en le placant a la derniere position et en le faisant remonter */
@@ -228,8 +228,8 @@ void afficher (Tas* t) {
   printf("Nb noeud : %d\n", t->nbNoeud);
 
   while (i < t->nbNoeud) {
-    printf("posTas : %d, %d -> %f\n", t->val[t->tas[i]]->posTas,
-	   t->val[t->tas[i]]->numero, t->val[t->tas[i]]->distance);
+    printf("posTas : %d, %d -> %d\n", t->val[t->tas[i]]->posTas,
+	   t->val[t->tas[i]]->numero, t->val[t->tas[i]]->poids);
     i++;
   }
 }
