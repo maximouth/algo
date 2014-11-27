@@ -2,8 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "graph.h"
-#include "lectGraph.h"
+#include "reseau.h"
 #include "generateurDot.h"
 
 /*
@@ -14,7 +13,7 @@
  */
 
 
-void generateur(FILE *f, Graph *g) {
+void generateur(FILE *f, Reseau *res) {
   Point *p;
   Voisin *v;
 

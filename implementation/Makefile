@@ -2,16 +2,21 @@
 GCC=gcc
 GPP=g++
 
-#FLAGS=-Wall -g -D DEBUG
-FLAGS=-Wall -g 
+FLAGS=-Wall -g -D DEBUG
+#FLAGS=-Wall -g 
 GCCFLAGS=  -g
 CPPFLAGS= -D DEBUG
 LIBS= -lm
 
 # User definitions must be here
 EXEC = Projet_ex.x
-INCS = graph.h entree_sortie.h lectGraph.h generateurDot.h
-SOURCES = graph.c main.c entree_sortie.c lectGraph.c generateurDot.c
+INCS = reseau.h \
+entree_sortie.h \
+
+SOURCES = reseau.c \
+entree_sortie.c \
+main.c  
+
 OBJS = $(SOURCES:.c=.o)
 
 

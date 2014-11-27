@@ -1,10 +1,9 @@
-#include "entree_sortie.h"
-#include "graph.h"
-#include "lectGraph.h"
-
 
 #include <string.h>
 
+#include "entree_sortie.h"
+#include "reseau.h"
+#include "lectGraph.h"
 
 /*
  *  ouvrir fichier, lire le nb de point quil y a et initialiser un graph avec
@@ -17,9 +16,9 @@
  *
  */
 
-Graph *lectGraph(FILE *f) {
+Reseau *lectGraph(FILE *f) {
 
-  Graph *g = NULL;
+  Reseau *res = NULL;
   int taille = 10;
   char s [taille];
   int nbPoints;
@@ -40,16 +39,16 @@ Graph *lectGraph(FILE *f) {
   nbAretes = atoi(s);
   
   //creation d'un graph de nbPoint points
-  g = creerGraph(nbPoints, nbAretes);
+  res = creerReseau(nbPoints, nbAretes);
   
   //tant qu'il y a des points a lire faire :
   for(cpt = 0; cpt < nbPoints; cpt++) {    
-    p = creerPoint();
+    p = creerNoeud();
 
     //lire le nom du point
     GetChaine(f, taille, s);
     printf("nom du point : %s ",s);
-    p->nom = strdup (s);
+    p->num = atoi(s);
 
     //savoir si point terminal ou pas
     GetChaine(f, taille, s);
@@ -66,14 +65,11 @@ Graph *lectGraph(FILE *f) {
     // recuperer les coordonnees
     GetChaine(f, taille, s);
     printf("(%s,",s);
-    tmp = atoi(s);
-    
-    p->x = tmp;
+    p->x = atoi(s);
 
     GetChaine(f, taille, s);
     printf("%s)\n",s);
-    tmp = atoi(s);
-    p->y = tmp;
+    p->y = atoi(s);
 
     ajouterPoint(g,p);
   }
