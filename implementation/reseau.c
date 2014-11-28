@@ -71,6 +71,7 @@ Reseau *creerReseau() {
   new_res->nbNoeuds = 0;
   new_res->nbAretes = 0;
   new_res->noeuds = NULL;
+  new_res->dep = NULL;
   new_res->commodites = NULL;
 
 #ifdef DEBUG
@@ -177,9 +178,11 @@ Reseau *lectureReseau(FILE *f) {
   while (cptnb < nb) {
     //création et positionnement du noeud courant
     noeuds = creerlistenoeud();
-    if(res->noeuds == NULL) {
+    noeuds->cour = creerNoeud();
+   if(res->noeuds == NULL) {
       /* Premier noeud de la liste */
       res->noeuds = noeuds;
+      res->dep = noeuds->cour;
     }
     else {
       /* Inserer un autre noeud */

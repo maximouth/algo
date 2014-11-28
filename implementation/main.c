@@ -64,13 +64,10 @@ int main(int argc, char *argv[]) {
   afficher(tas);
 #endif
 
-
-
-  //creation du tas pour la premiere commodité
-  dijkstra(tas, res, res->noeuds->cour); 
+  //creation du tas pour le premier noeud
+  dijkstra(tas, res, res->dep); 
   printf("Calcul dijkstra terminée.\n");
   
-
   afficheDij(tas,res,dijk);
 #ifdef DEBUG
     for(i = 0; i<res->nbNoeuds; i++) {

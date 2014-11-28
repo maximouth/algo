@@ -31,6 +31,7 @@ typedef struct {
   int nbNoeuds ; /*Nombre de noeuds du reseau */
   int nbAretes ; /*Nombre maximal de fibres par cable */
   CellNoeud * noeuds ; /*Liste des noeuds du reseau */
+  Noeud *dep;   /* Premier noeud du reseau */
   CellCommodite * commodites ; /*Liste des commodites a relier */ 
 } Reseau ;
 

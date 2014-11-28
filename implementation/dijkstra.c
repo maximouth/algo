@@ -105,9 +105,11 @@ void afficheDij(Tas *tas, Reseau *res, FILE *f) {
   fprintf(f, "\n"); 
 
 
- for(i = 0; i<res->nbNoeuds-1; i++) {
-     	fprintf(f,"\"myNode%d\" -> \"myNode%d\" [ \tpenwidth = 0.001 \n\t color = red\n\tlabel = \"%f\" ]\n",tas->val[i]->numero, tas->val[i]->precedent, tas->val[i]->poids );
-    }
+ for(i = 0; i<res->nbNoeuds; i++) {
+   if(tas->val[i]->precedent != -1) {
+     fprintf(f,"\"myNode%d\" -> \"myNode%d\" [ \tpenwidth = 0.001 \n\t color = red\n\tlabel = \"%f\" ]\n",tas->val[i]->numero, tas->val[i]->precedent, tas->val[i]->poids );
+   }
+ }
 
  fprintf(f,"\n}\n");
 }
