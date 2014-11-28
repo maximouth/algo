@@ -11,6 +11,7 @@ int main(int argc, char *argv[]) {
 
   FILE *f=  NULL;
   FILE *gr = NULL;
+  FILE *dijk = NULL;
   Reseau *res = NULL;
   Tas *tas;
 #ifdef DEBUG
@@ -38,6 +39,14 @@ int main(int argc, char *argv[]) {
     exit(1);
   }
 
+   /* Ouverture du fichier de sortie */
+  printf("nom fichier : %s\n", strcat(argv[2],"Dijk"));
+	 dijk = fopen(argv[2],"w");
+  if (f== NULL) {
+    printf("Impossible d'ouvrir le fichier : %s.\n", argv[2]);
+    exit(1);
+  }
+
   /* Lecture du reseau */
   res = lectureReseau(f);
   printf("Lecture reseau terminé.\n");
@@ -45,7 +54,7 @@ int main(int argc, char *argv[]) {
   /* Affichage en formt dot */
   ecrireReseauDot(res, gr);
   printf("Ecriture fichier dot terminé.\n");
-  //system("neato -s -Tps -o graph.ps test.dot");
+  //system("neato -s -Tps -o graph.ps -n test.dot");
 
   //initialisation du tas à partir des noeuds du reseau
   tas = initTas(res);
@@ -55,16 +64,23 @@ int main(int argc, char *argv[]) {
   afficher(tas);
 #endif
 
+
+
   //creation du tas pour la premiere commodité
   dijkstra(tas, res, res->noeuds->cour); 
   printf("Calcul dijkstra terminée.\n");
   
+
+  afficheDij(tas,res,dijk);
 #ifdef DEBUG
     for(i = 0; i<res->nbNoeuds; i++) {
-      printf("%d.%d : %d -> %d\n", i, tas->val[i]->numero, 
+      printf("%d.%d : %d -> %.03f\n", i, tas->val[i]->numero, 
 	     tas->val[i]->precedent, tas->val[i]->poids);
     }
 #endif
+
+
+
 
   return 0;
 }

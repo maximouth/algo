@@ -6,7 +6,7 @@
 /* Liste chainee de noeuds */
 typedef struct cellNoeud {
   struct noeud * cour ;  /* Pointeur vers le noeud courant */
-  int poids;
+  double poids;
   struct cellNoeud * suiv ;  /* Cellule suivante dans la liste */
 } CellNoeud ;
 

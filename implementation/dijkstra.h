@@ -8,5 +8,6 @@ Tas* initTas(Reseau *res);
 void dijkstra(Tas *tas, Reseau *res, Noeud *deb);
 void initTab(int nbNoeuds);
 void freeTab(int nbNoeuds);
+void afficheDij(Tas *t, Reseau *res, FILE *f);
 
 #endif

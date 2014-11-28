@@ -152,7 +152,7 @@ Reseau *lectureReseau(FILE *f) {
   char s[MAX_TAILLE_LECTURE];
   int nb = 0;
   int cptnb = 0;
-  int poids = 0;
+  double poids = 0;
 
   Noeud *ndtmp1 = NULL;
   Noeud *ndtmp2 = NULL;
@@ -246,7 +246,7 @@ printf ("nb = %d \ncptnb = %d\n", nb ,cptnb);
 #ifdef DEBUG
     printf ("%s\n",s);
 #endif
-    poids = atoi(s);
+    poids = atof(s);
     
     //Chainage du voisin du noeud 1
     celltmp1 =creerlistenoeud();
@@ -407,7 +407,7 @@ void ecrireReseauDot(Reseau *res, FILE *f)
   }
 
   /* Entete du fichier */
-  fprintf(f,"graph g { \n\trankdir = LR\n\tbgcolor = grey50\nsize = \"1500\"\n");
+  fprintf(f,"graph g { \n\trankdir = LR\n\tbgcolor = grey50\n\tsize = \"1500\"\n\n");
   
   /* Ecriture des coordonnées des noeuds */
   noeuds = res->noeuds;
@@ -435,7 +435,7 @@ void ecrireReseauDot(Reseau *res, FILE *f)
     while (voisin != NULL) {
       if(noeuds->cour->num > voisin->cour->num) {
         /* Afficher les voisins que dans un sens */
-	fprintf(f,"\"myNode%d\" -- \"myNode%d\" [ \tpenwidth = 0.001 \n\t color = red\n\tlabel = \"%d\" ]\n",noeuds->cour->num, voisin->cour->num, voisin->poids );
+	fprintf(f,"\"myNode%d\" -- \"myNode%d\" [ \tpenwidth = 0.001 \n\t color = red\n\tlabel = \"%f\" ]\n",noeuds->cour->num, voisin->cour->num, voisin->poids );
       }
 
       /* Passage au voisin suivant */
