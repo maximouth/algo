@@ -23,16 +23,18 @@ typedef struct tas {
 
 
 
+Tas *initialiser(int taille);
+int est_vide(Tas *t);
+void ajouter(Tas *t, Elem *el);
+void supprime(Tas *t, int idx);
+Elem *recup_min(Tas *t);
+
+
 Elem *creerElem();
-Tas *creerTas(int taille);
 void remplirElem(Elem *el, Noeud *n, int precedent, double poids);
 
-void inserer(Tas *t, Elem *el);
-void supprimer(Tas *t, int idx);
 void miseAJour(Tas *t, Elem *el);
 Elem *rechercher(Tas *t, int idx);
-int tasVide(Tas *t);
-Elem *minimum(Tas *t);
 void afficher(Tas* t);
 
 #endif

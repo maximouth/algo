@@ -29,7 +29,7 @@ Elem *creerElem()
   
   
 /* creer un Tas*/
-Tas *creerTas(int taille) {
+Tas *initialiser(int taille) {
   int i =0;
   
   //creation de la structure de tas et de ces fils
@@ -74,7 +74,7 @@ int compare(Tas *t, int i, int p)
 }
 
 /* inserer un nouvel element dans le tas en le placant a la derniere position et en le faisant remonter */
-void inserer( Tas *t, Elem *el) 
+void ajouter( Tas *t, Elem *el) 
 {
   int i = 0;
   int p = 0;
@@ -124,16 +124,17 @@ void inserer( Tas *t, Elem *el)
   t->nbNoeud++;
 }
 
-Elem *minimum(Tas *t)
+Elem *recup_min(Tas *tas)
 {
   Elem *e;
 
-  if(t->nbNoeud == 0) {
+  if(tas->nbNoeud == 0) {
     //tas vide
     e = NULL;
   }
   else {
-    e = t->val[t->tas[0]];
+    e = tas->val[tas->tas[0]];
+    supprime(tas, e->numero);
   }
 
   return e;
@@ -145,7 +146,7 @@ Elem *rechercher(Tas *t, int idx)
 }
 
 
-void supprimer (Tas *t, int idx) { 
+void supprime(Tas *t, int idx) { 
   int i = 0;
   int j, d, g, s;
 
@@ -234,7 +235,7 @@ void afficher (Tas* t) {
   }
 }
 
-int tasVide(Tas *t)
+int est_vide(Tas *t)
 {
   return(t->nbNoeud == 0);
 }
@@ -242,7 +243,7 @@ int tasVide(Tas *t)
 void marquer(Tas *t, int idx)
 {
   //supprimer le noeud du tas
-  supprimer(t, idx);
+  supprime(t, idx);
 }
 
 void miseAJour(Tas *t, Elem *el) 

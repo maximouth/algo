@@ -20,7 +20,7 @@ Tas *initTas(Reseau *res)
   Elem *e;
 
   //creer un tas de la taille du reseau
-  t = creerTas(res->nbNoeuds);
+  t = initialiser(res->nbNoeuds);
   
   //inserer tous les noeuds du reseau avec une distance max
   n = res->noeuds;
@@ -28,7 +28,7 @@ Tas *initTas(Reseau *res)
   while(n != NULL) {
     e = creerElem();
     remplirElem(e, n->cour, -1, INT_MAX);
-    inserer(t, e);
+    ajouter(t, e);
     n = n->suiv;
   }
 
@@ -46,13 +46,10 @@ void dijkstra(Tas *tas, Reseau *res, Noeud *deb) {
   tas->val[deb->num]->poids = 0.0;
   miseAJour(tas, tas->val[deb->num]);
   
-  while(!tasVide(tas)) {
+  while(!est_vide(tas)) {
     //rechercher le plus petit noeud non parcouru 
-    e = minimum(tas);
+    e = recup_min(tas);
 
-    //marquer le noeud en le supprimant du tas
-    supprimer(tas, e->numero);
-    
     // parcourir tous les voisins du noeud
     voisin = e->noeud->voisins;
     while(voisin != NULL) {
