@@ -1,6 +1,8 @@
 #ifndef _DIS_h_
 #define _DIS_h_
 
+#include <stdio.h>
+
 #include "tas_dijkstra.h"
 #include "reseau.h"
 

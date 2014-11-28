@@ -8,41 +8,10 @@
 #include "dijkstra.h"
 
 
-/* double calcDistance(Noeud *a, Noeud *b) */
-/* { */
-/*   double dist; */
-
-/*   dist = sqrt ( (b->x - a->x) * (b->x - a->x) + (b->y - a->y) * (b->y - a->y)); */
-
-/*   return(dist); */
-/* } */
-
 double calcDistance(Noeud *a, CellNoeud *b)
 {
   return b->poids;
 }
-
-/*
-void initTab(int nbNoeuds)
-{
-  int i;
-  
-  tab = (int * *) malloc( nbNoeuds * sizeof( int *));
-  for(i = 0; i<nbNoeuds; i++) {
-    tab[i] = (int *) malloc( nbNoeuds * sizeof(int));
-  }
-}
-
-void freeTab(int nbNoeuds) 
-{
-  int i;
-
-  for(i = 0; i<nbNoeuds; i++) {
-    free(tab[i]);
-  }
-  free(tab);
-}
-*/
 
 Tas *initTas(Reseau *res) 
 {
