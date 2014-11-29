@@ -22,7 +22,6 @@ Prim* prim(Tas *tas, Reseau *res, Noeud *deb)
   pred = malloc(res->nbNoeuds*sizeof(int));
   d = malloc(res->nbNoeuds*sizeof(double));
   M = malloc(res->nbNoeuds*sizeof(int));
-  printf("NbNoeuds : %d\n", res->nbNoeuds);
 
   for(i = 0; i < res->nbNoeuds; i++) {
     pred[i] = -1;
@@ -44,7 +43,6 @@ Prim* prim(Tas *tas, Reseau *res, Noeud *deb)
     // parcourir tous les voisins du noeud
     voisin = e->noeud->voisins;
     while(voisin != NULL) {
-      printf("prim %d -> %d\n",e->noeud->num,  voisin->cour->num);
       if(M[voisin->cour->num] == 0) {
 	d[voisin->cour->num] = voisin->poids;
 	pred[voisin->cour->num] = e->noeud->num;
@@ -60,9 +58,6 @@ Prim* prim(Tas *tas, Reseau *res, Noeud *deb)
 	  tas->val[voisin->cour->num]->poids = voisin->poids;
 	  miseAJour(tas, tas->val[voisin->cour->num]);	  
 	}
-      }
-      if(voisin->cour->num == 99) {
-	printf("num : %d, d : %.03f,  pred : %d, M : %d\n", voisin->cour->num, d[voisin->cour->num], pred[voisin->cour->num], M[voisin->cour->num]);
       }
 
       //traiter le voisin suivant

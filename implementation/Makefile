@@ -2,8 +2,8 @@
 GCC=gcc
 GPP=g++
 
-FLAGS=-Wall -g -D DEBUG
-#FLAGS=-Wall -g 
+#FLAGS=-Wall -g -D DEBUG
+FLAGS=-Wall -g 
 GCCFLAGS=  -g
 CPPFLAGS= -D DEBUG
 LIBS= -lm
