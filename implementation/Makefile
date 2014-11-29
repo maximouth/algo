@@ -13,12 +13,14 @@ EXEC = Projet_ex.x
 INCS = reseau.h \
 entree_sortie.h \
 tas_dijkstra.h \
-dijkstra.h
+dijkstra.h \
+prim.h
 
 SOURCES = reseau.c \
 entree_sortie.c \
 tas_dijkstra.c \
 dijkstra.c \
+prim.c \
 main.c  
 
 OBJS = $(SOURCES:.c=.o)

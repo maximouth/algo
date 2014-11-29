@@ -29,6 +29,7 @@ void ajouter(Tas *t, Elem *el);
 void supprime(Tas *t, int idx);
 Elem *recup_min(Tas *t);
 
+Tas* initTas(Reseau *res);
 
 Elem *creerElem();
 void remplirElem(Elem *el, Noeud *n, int precedent, double poids);

@@ -5,15 +5,17 @@
 #include "reseau.h"
 #include "tas_dijkstra.h"
 #include "dijkstra.h"
+#include "prim.h"
 
 
 int main(int argc, char *argv[]) {
 
   FILE *f=  NULL;
-  FILE *gr = NULL;
-  FILE *dijk = NULL;
   Reseau *res = NULL;
   Tas *tas;
+  Prim *resPrim;
+  char *nomFic;
+
 #ifdef DEBUG
   int i;
 #endif
@@ -31,29 +33,26 @@ int main(int argc, char *argv[]) {
     exit(1);
   }
   
-  /* Ouverture du fichier de sortie */
-  printf("nom fichier : %s\n", argv[2]);
-  gr = fopen(argv[2],"w");
-  if (f== NULL) {
-    printf("Impossible d'ouvrir le fichier : %s.\n", argv[2]);
-    exit(1);
-  }
 
-   /* Ouverture du fichier de sortie */
-  printf("nom fichier : %s\n", strcat(argv[2],"Dijk"));
-	 dijk = fopen(argv[2],"w");
-  if (f== NULL) {
-    printf("Impossible d'ouvrir le fichier : %s.\n", argv[2]);
-    exit(1);
-  }
 
   /* Lecture du reseau */
   res = lectureReseau(f);
+  fclose(f);
   printf("Lecture reseau terminé.\n");
 
-  /* Affichage en formt dot */
-  ecrireReseauDot(res, gr);
+  /* Ouverture du fichier de sortie */
+  printf("nom fichier : %s\n", argv[2]);
+  f = fopen(argv[2],"w");
+  if (f == NULL) {
+    printf("Impossible d'ouvrir le fichier : %s.\n", argv[2]);
+    exit(1);
+  }
+
+  /* Affichage en forme dot */
+  ecrireReseauDot(res, f);
   printf("Ecriture fichier dot terminé.\n");
+  fclose(f);
+
   //system("neato -s -Tps -o graph.ps -n test.dot");
 
   //initialisation du tas à partir des noeuds du reseau
@@ -64,11 +63,24 @@ int main(int argc, char *argv[]) {
   afficher(tas);
 #endif
 
-  //creation du tas pour le premier noeud
+  // Appel de Dijkstra sur le noeud de départ
   dijkstra(tas, res, res->dep); 
-  printf("Calcul dijkstra terminée.\n");
+  printf("Calcul dijkstra terminé.\n");
+
+  /* Ouverture du fichier de sortie */
+  nomFic = malloc(strlen(argv[2])+4);
+  strcpy(nomFic, argv[2]);
+  strcat(nomFic, "Dij");
+  printf("nom fichier : %s\n", nomFic);
+  f = fopen(nomFic,"w");
+  if (f == NULL) {
+    printf("Impossible d'ouvrir le fichier : %s.\n", nomFic);
+    exit(1);
+  }
   
-  afficheDij(tas,res,dijk);
+  afficheDij(tas, res, f);
+  fclose(f);
+
 #ifdef DEBUG
     for(i = 0; i<res->nbNoeuds; i++) {
       printf("%d.%d : %d -> %.03f\n", i, tas->val[i]->numero, 
@@ -76,8 +88,37 @@ int main(int argc, char *argv[]) {
     }
 #endif
 
+  /*
+  printReseau(res);
+  */
 
+  //initialisation du tas à partir des noeuds du reseau
+  tas = initTas(res);
+  printf("Initialisation du tas terminée.\n");
 
+  // Appel de Prim sur le noeud de départ
+  resPrim = prim(tas, res, res->dep); 
+  printf("Calcul Prim terminé.\n");
+
+  printf("Poids arbre : %.03f\n", calculPoids(resPrim, res));
+
+#ifdef DEBUG
+  for(i = 0; i<res->nbNoeuds; i++) {
+    printf("%d : %d -> %.3f\n", i, resPrim->pred[i], resPrim->d[i]);
+  }
+#endif
+  /* Ouverture du fichier de sortie */
+  strcpy(nomFic, argv[2]);
+  strcat(nomFic, "Pri");
+  printf("nom fichier : %s\n", nomFic);
+  f = fopen(nomFic,"w");
+  if (f == NULL) {
+    printf("Impossible d'ouvrir le fichier : %s.\n", nomFic);
+    exit(1);
+  }
+    
+  affichePrim(resPrim, res, f);
+  fclose(f);
 
   return 0;
 }

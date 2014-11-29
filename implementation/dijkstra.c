@@ -13,28 +13,6 @@ double calcDistance(Noeud *a, CellNoeud *b)
   return b->poids;
 }
 
-Tas *initTas(Reseau *res) 
-{
-  Tas *t;
-  CellNoeud *n = NULL;
-  Elem *e;
-
-  //creer un tas de la taille du reseau
-  t = initialiser(res->nbNoeuds);
-  
-  //inserer tous les noeuds du reseau avec une distance max
-  n = res->noeuds;
-
-  while(n != NULL) {
-    e = creerElem();
-    remplirElem(e, n->cour, -1, INT_MAX);
-    ajouter(t, e);
-    n = n->suiv;
-  }
-
-  return t;
-}
-
 
 void dijkstra(Tas *tas, Reseau *res, Noeud *deb) {
 

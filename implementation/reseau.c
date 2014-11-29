@@ -190,8 +190,7 @@ Reseau *lectureReseau(FILE *f) {
       res->noeuds = noeuds;
     }
 
-    noeuds->cour = creerNoeud();
-    nd = noeuds->cour;
+   nd = noeuds->cour;
         
     //lecture du numero du noeuds
     GetChaine (f, MAX_TAILLE_LECTURE , s);
@@ -602,6 +601,15 @@ void printReseau(Reseau *res) {
     }
     n = n->suiv;
   }
+
+  printf("Dep :\n");
+  printf("(%d, %d)\n", res->dep->x, res->dep->y);
+    voisin = res->dep->voisins;
+    while(voisin != NULL) {
+      printf("  -> (%d, %d)\n", voisin->cour->x, voisin->cour->y);
+      voisin = voisin->suiv;
+    }
+ 
 
   printf("Com :\n");
   while(com != NULL) {

@@ -1,15 +1,13 @@
 #ifndef _DIS_h_
 #define _DIS_h_
 
-#include <stdio.h>
-
 #include "tas_dijkstra.h"
 #include "reseau.h"
 
-Tas* initTas(Reseau *res);
+/* Algorithme de Dijkstra */
 void dijkstra(Tas *tas, Reseau *res, Noeud *deb);
-void initTab(int nbNoeuds);
-void freeTab(int nbNoeuds);
+
+/* Affichage de l'arbre de Dijkstra en dot */
 void afficheDij(Tas *t, Reseau *res, FILE *f);
 
 #endif

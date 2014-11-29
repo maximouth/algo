@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <float.h>
 
 #include "tas_dijkstra.h"
 #include "reseau.h"
@@ -55,6 +56,29 @@ Tas *initialiser(int taille) {
   return tas;
 }
 
+/* Remplir un tas à partir d'un réseau avec tous les noeux ayant une distance max */
+Tas *initTas(Reseau *res) 
+{
+  Tas *tas;
+  CellNoeud *n = NULL;
+  Elem *e;
+
+  //creer un tas de la taille du reseau
+  tas = initialiser(res->nbNoeuds);
+  
+  //inserer tous les noeuds du reseau avec une distance max
+  n = res->noeuds;
+
+  while(n != NULL) {
+    e = creerElem();
+    remplirElem(e, n->cour, -1, FLT_MAX);
+    ajouter(tas, e);
+    n = n->suiv;
+  }
+
+  return tas;
+}
+
 /* initialiser un element avec les valeurs passées en arguments */
 void remplirElem(Elem *el, Noeud *n, int precedent, double poids) {
   el->numero = n->num;
@@ -98,7 +122,7 @@ void ajouter( Tas *t, Elem *el)
     p = pere(i);
 
 #ifdef DEBUG
-    printf("i : %d  p : %d\n", i, p);
+    printf("Ajouter i : %d  p : %d\n", i, p);
 #endif
 
     if(compare(t, i, p)) {
@@ -240,12 +264,6 @@ int est_vide(Tas *t)
   return(t->nbNoeud == 0);
 }
 
-void marquer(Tas *t, int idx)
-{
-  //supprimer le noeud du tas
-  supprime(t, idx);
-}
-
 void miseAJour(Tas *t, Elem *el) 
 {
   int i = 0;
@@ -265,7 +283,7 @@ void miseAJour(Tas *t, Elem *el)
     p = pere(i);
 
 #ifdef DEBUG
-    printf("i : %d  p : %d\n", i, p);
+    printf("MaJ i : %d  p : %d\n", i, p);
 #endif
 
     if(compare(t, i, p)) {
