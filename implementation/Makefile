@@ -22,7 +22,7 @@ entree_sortie.c \
 tas_dijkstra.c \
 dijkstra.c \
 prim.c \
-graphe_distance.h \
+graphe_distance.c \
 main.c  
 
 OBJS = $(SOURCES:.c=.o)

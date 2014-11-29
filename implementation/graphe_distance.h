@@ -4,6 +4,6 @@
 #include "reseau.h"
 
 /* Creation d'un grahe de distance */
-CellNoeud* grapheDistance(Reseau *res);
+Reseau* grapheDistance(Reseau *res);
 
 #endif

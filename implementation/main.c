@@ -6,6 +6,7 @@
 #include "tas_dijkstra.h"
 #include "dijkstra.h"
 #include "prim.h"
+#include "graphe_distance.h"
 
 
 int main(int argc, char *argv[]) {
@@ -118,6 +119,17 @@ int main(int argc, char *argv[]) {
     
   affichePrim(resPrim, res, f);
   fclose(f);
+
+  f = fopen("GrapheDist.txt","w");
+  if (f == NULL) {
+    printf("Impossible d'ouvrir le fichier : %s.\n", nomFic);
+    exit(1);
+  }
+
+  ecrireReseauTxt(grapheDistance(res), f);
+
+  fclose(f);
+
 
   return 0;
 }

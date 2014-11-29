@@ -145,7 +145,7 @@ Reseau *lectureReseau(FILE *f) {
   GetChaine (f, MAX_TAILLE_LECTURE , s);
   res->nbAretes = atoi(s);
 #ifdef DEBUG
-  printf("%d \n" ,res->nbAretes);
+  printf("%d \n", res->nbAretes);
 #endif
   
   nb = res->nbNoeuds;
@@ -288,8 +288,9 @@ void ecrireReseauTxt(Reseau *res, FILE *f)
   noeuds = res->noeuds;
   while(noeuds != NULL) {
     fprintf(f, "%d ", noeuds->cour->num);
-    fprintf(f, "%.d ", noeuds->cour->x);
-    fprintf(f, "%.d\n", noeuds->cour->y);
+    fprintf(f, "%d ", noeuds->cour->term);
+    fprintf(f, "%d ", noeuds->cour->x);
+    fprintf(f, "%d\n", noeuds->cour->y);
     
     /* Passage au noeud suivant */
     noeuds = noeuds->suiv;
@@ -305,7 +306,7 @@ void ecrireReseauTxt(Reseau *res, FILE *f)
     while (voisin != NULL) {
       if(noeuds->cour->num > voisin->cour->num) {
         /* Afficher les voisins que dans un sens */
-        fprintf(f, "a %d %d\n", noeuds->cour->num, voisin->cour->num);
+        fprintf(f, "%d %d %.3f\n", noeuds->cour->num, voisin->cour->num, voisin->poids);
       }
 
       /* Passage au voisin suivant */
