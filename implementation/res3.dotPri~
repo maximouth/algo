@@ -1,0 +1,59 @@
+graph g { 
+	rankdir = LR
+	bgcolor = grey50
+	size = "1500"
+
+	myNode5 [
+	label = "f"
+	color = green
+	pos = "200,0"
+	]
+
+	myNode4 [
+	label = "e"
+	color = green
+	pos = "100,100"
+	]
+
+	myNode3 [
+	label = "d"
+	color = blue
+	pos = "100,200"
+	]
+
+	myNode2 [
+	label = "c"
+	color = blue
+	pos = "100,0"
+	]
+
+	myNode1 [
+	label = "b"
+	color = blue
+	pos = "200,100"
+	]
+
+	myNode0 [
+	label = "a"
+	color = blue
+	pos = "0,100"
+	]
+
+
+"myNode1" -- "myNode4" [ 	penwidth = 0.04 
+	 color = red
+	label = "2.0" ]
+"myNode2" -- "myNode4" [ 	penwidth = 0.04 
+	 color = red
+	label = "1.0" ]
+"myNode3" -- "myNode4" [ 	penwidth = 0.04 
+	 color = red
+	label = "2.0" ]
+"myNode4" -- "myNode0" [ 	penwidth = 0.04 
+	 color = red
+	label = "2.0" ]
+"myNode5" -- "myNode1" [ 	penwidth = 0.04 
+	 color = red
+	label = "1.0" ]
+
+}

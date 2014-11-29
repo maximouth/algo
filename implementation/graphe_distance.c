@@ -77,8 +77,9 @@ Reseau* grapheDistance(Reseau *res)
     nbNoeuds++;
     tmp1 = tmp1->suiv;
   }
-
-  //  gd->nbNoeuds = nbNoeuds;
+  
+  // Attention ruse!!
+  //gd->nbNoeuds = nbNoeuds;
   //gd->nbAretes = nbAretes;
   gd->nbNoeuds = res->nbNoeuds;
   gd->nbAretes = res->nbAretes;
