@@ -79,6 +79,15 @@ Tas *initTas(Reseau *res)
   return tas;
 }
 
+void detruireTas(Tas *tas)
+{
+  if(tas != NULL) {
+    free(tas->val);
+    free(tas->tas);
+    free(tas);
+  }
+}
+
 /* initialiser un element avec les valeurs passées en arguments */
 void remplirElem(Elem *el, Noeud *n, int precedent, double poids) {
   el->numero = n->num;

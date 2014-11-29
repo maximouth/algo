@@ -7,7 +7,6 @@
 #include "reseau.h"
 #include "dijkstra.h"
 
-
 double calcDistance(Noeud *a, CellNoeud *b)
 {
   return b->poids;
@@ -45,6 +44,11 @@ void dijkstra(Tas *tas, Reseau *res, Noeud *deb) {
   }
 }
 
+
+double poidsMin(Reseau *res, Noeud *deb, Noeud *arr)
+{
+  return 0.0;
+}
 
 void afficheDij(Tas *tas, Reseau *res, FILE *f) {
 

@@ -30,6 +30,7 @@ void supprime(Tas *t, int idx);
 Elem *recup_min(Tas *t);
 
 Tas* initTas(Reseau *res);
+void detruireTas(Tas *t);
 
 Elem *creerElem();
 void remplirElem(Elem *el, Noeud *n, int precedent, double poids);

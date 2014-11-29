@@ -88,11 +88,10 @@ int main(int argc, char *argv[]) {
     }
 #endif
 
-  /*
   printReseau(res);
-  */
 
   //initialisation du tas à partir des noeuds du reseau
+  detruireTas(tas);
   tas = initTas(res);
   printf("Initialisation du tas terminée.\n");
 
