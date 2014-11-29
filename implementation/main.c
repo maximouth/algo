@@ -13,6 +13,7 @@ int main(int argc, char *argv[]) {
 
   FILE *f=  NULL;
   Reseau *res = NULL;
+  Reseau *gd = NULL;
   Tas *tas;
   Prim *resPrim;
   char *nomFic;
@@ -120,16 +121,43 @@ int main(int argc, char *argv[]) {
   affichePrim(resPrim, res, f);
   fclose(f);
 
-  f = fopen("GrapheDist.txt","w");
+  /* Construction du graphe distance */
+  gd = grapheDistance(res);
+
+  /* Ouverture du fichier de sortie */
+  strcpy(nomFic, argv[2]);
+  strcat(nomFic, "GD");
+  printf("nom fichier : %s\n", nomFic);
+  f = fopen(nomFic,"w");
   if (f == NULL) {
     printf("Impossible d'ouvrir le fichier : %s.\n", nomFic);
     exit(1);
   }
 
-  ecrireReseauTxt(grapheDistance(res), f);
-
+  ecrireReseauDot(gd, f); 
   fclose(f);
 
+   //initialisation du tas à partir des noeuds du reseau
+  detruireTas(tas);
+  tas = initTas(gd);
+
+  printf("Initialisation du tas terminée.\n");
+ 
+  resPrim = prim(tas, gd, gd->dep); 
+  printf("Calcul Prim graphe distance terminé.\n");
+
+  /* Ouverture du fichier de sortie */
+  strcpy(nomFic, argv[2]);
+  strcat(nomFic, "Pgd");
+  printf("nom fichier : %s\n", nomFic);
+  f = fopen(nomFic,"w");
+  if (f == NULL) {
+    printf("Impossible d'ouvrir le fichier : %s.\n", nomFic);
+    exit(1);
+  }
+    
+  affichePrim(resPrim, gd, f);
+  fclose(f);
 
   return 0;
 }

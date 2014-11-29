@@ -9,7 +9,6 @@ Reseau* grapheDistance(Reseau *res)
   CellNoeud *tmp1, *tmp2, *celltmp1, *celltmp2;
   CellNoeud *nc;
   Noeud *ndtmp1 = NULL;
-  Noeud *ndtmp2 = NULL;
   Tas *tas;
   int nbNoeuds = 0;
   int nbAretes = 0;
@@ -53,7 +52,6 @@ Reseau* grapheDistance(Reseau *res)
     
     tmp2 = tmp1->suiv;
     while(tmp2 != NULL) {
-      printf("GD : %d --> %d\n", tmp1->cour->num, tmp2->cour->num);
 
       //Chainage du voisin du noeud 1
       celltmp1 =creerlistenoeud();
@@ -80,8 +78,10 @@ Reseau* grapheDistance(Reseau *res)
     tmp1 = tmp1->suiv;
   }
 
-  gd->nbNoeuds = nbNoeuds;
-  gd->nbAretes = nbAretes;
+  //  gd->nbNoeuds = nbNoeuds;
+  //gd->nbAretes = nbAretes;
+  gd->nbNoeuds = res->nbNoeuds;
+  gd->nbAretes = res->nbAretes;
   
   return gd;
 }
