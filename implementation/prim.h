@@ -8,6 +8,7 @@
 
  /* Noeud du reseau */
 typedef struct prim {
+  int nbNoeuds; /* Nombre de noeuds dans le tableau */
   int *pred; /* Tableau des predecesseurs */
   double *d; /* Tableau des distances */
 } Prim ;

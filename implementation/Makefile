@@ -15,7 +15,8 @@ entree_sortie.h \
 tas_dijkstra.h \
 dijkstra.h \
 prim.h \
-graphe_distance.h 
+graphe_distance.h \
+steiner.h
 
 SOURCES = reseau.c \
 entree_sortie.c \
@@ -23,6 +24,7 @@ tas_dijkstra.c \
 dijkstra.c \
 prim.c \
 graphe_distance.c \
+steiner.c \
 main.c  
 
 OBJS = $(SOURCES:.c=.o)

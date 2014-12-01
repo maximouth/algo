@@ -319,11 +319,11 @@ void ecrireReseauTxt(Reseau *res, FILE *f)
 
   fprintf(f, "\n");
 
-  /* Ecriture de la liste des commodités */
+  /* Ecriture de la liste des terminaux */
   term = res->term;
   while(term != NULL) {
     fprintf(f, "Term : %d\n", term->cour->num);
-    /* Passage à la commodite suivante */
+    /* Passageau terminal suivant */
     term = term->suiv;
   }
 }

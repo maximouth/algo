@@ -7,6 +7,7 @@
 #include "dijkstra.h"
 #include "prim.h"
 #include "graphe_distance.h"
+#include "steiner.h"
 
 
 int main(int argc, char *argv[]) {
@@ -14,6 +15,7 @@ int main(int argc, char *argv[]) {
   FILE *f=  NULL;
   Reseau *res = NULL;
   Reseau *gd = NULL;
+  Reseau *st = NULL;
   Tas *tas;
   Prim *resPrim;
   char *nomFic;
@@ -90,8 +92,6 @@ int main(int argc, char *argv[]) {
     }
 #endif
 
-  printReseau(res);
-
   //initialisation du tas à partir des noeuds du reseau
   detruireTas(tas);
   tas = initTas(res);
@@ -157,6 +157,21 @@ int main(int argc, char *argv[]) {
   }
     
   affichePrim(resPrim, gd, f);
+  fclose(f);
+
+  st = steiner(resPrim, res);
+  
+   /* Ouverture du fichier de sortie */
+  strcpy(nomFic, argv[2]);
+  strcat(nomFic, "ST");
+  printf("nom fichier : %s\n", nomFic);
+  f = fopen(nomFic,"w");
+  if (f == NULL) {
+    printf("Impossible d'ouvrir le fichier : %s.\n", nomFic);
+    exit(1);
+  }
+
+  ecrireReseauDot(st, f); 
   fclose(f);
 
   return 0;

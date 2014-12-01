@@ -23,6 +23,8 @@ Prim* prim(Tas *tas, Reseau *res, Noeud *deb)
   d = malloc(res->nbNoeuds*sizeof(double));
   M = malloc(res->nbNoeuds*sizeof(int));
 
+  prim->nbNoeuds = res->nbNoeuds;
+
   for(i = 0; i < res->nbNoeuds; i++) {
     pred[i] = -1;
     d[i] = FLT_MAX;
@@ -68,6 +70,7 @@ Prim* prim(Tas *tas, Reseau *res, Noeud *deb)
 
   prim->pred = pred;
   prim->d = d;
+
   return prim;
 }
 

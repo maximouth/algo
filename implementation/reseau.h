@@ -34,7 +34,6 @@ Reseau *creerReseau();
 void detruireReseau(Reseau *res);
 Noeud * recherche_nd(Reseau *res , int num);
 Reseau *lectureReseau(FILE *f);
-int comptecable (Reseau *res);
 void ecrireReseauTxt(Reseau *res, FILE *f);
 void ecrireReseauDot(Reseau *res, FILE *f);
 void printReseau(Reseau *res);
