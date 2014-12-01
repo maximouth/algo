@@ -259,11 +259,13 @@ void supprime(Tas *t, int idx) {
 void afficher (Tas* t) {
   int i = 0;
 
-  printf("Nb noeud : %d\n", t->nbNoeud);
+  printf("Nb noeud : %d\n", t->nbMax);
 
-  while (i < t->nbNoeud) {
-    printf("posTas : %d, %d -> %.03f\n", t->val[t->tas[i]]->posTas,
-	   t->val[t->tas[i]]->numero, t->val[t->tas[i]]->poids);
+  while (i < t->nbMax) {
+    /*    printf("posTas : %d, %d -> %.03f\n", t->val[t->tas[i]]->posTas,
+	  t->val[t->tas[i]]->numero, t->val[t->tas[i]]->poids); */
+    printf("posTas : (%d, %d) -> %d, %d -> %.03f\n", i, t->tas[i], t->val[i]->precedent,
+	  t->val[i]->numero, t->val[i]->poids); 
     i++;
   }
 }
