@@ -8,7 +8,7 @@
 #include "reseau.h"
 #include "prim.h"
 
-float trouvePoids(Noeud *n1, Noeud *n2)
+double trouvePoids(Noeud *n1, Noeud *n2)
 {
   CellNoeud *n = n1->voisins;
 
@@ -18,6 +18,29 @@ float trouvePoids(Noeud *n1, Noeud *n2)
     n = n->suiv;
   }
   return 0.0;
+}
+
+void ajoutVoisin(Noeud *nDeb, Noeud *nArr, double p)
+{
+  CellNoeud *n = nDeb->voisins;
+  CellNoeud *celltmp;
+  int trouve = 0;
+
+  while(n != NULL && !trouve) {
+    if(n->cour->num == nArr->num) 
+      trouve = 1;
+    n = n->suiv;
+  }
+
+  if(!trouve) {
+    /* Le noeud n'existe pas dans la liste des voisins */
+    /* Chainage du voisin du noeud 1*/
+    celltmp =creerlistenoeud();
+    celltmp->cour = nArr;
+    celltmp->suiv = nDeb->voisins;
+    nDeb->voisins = celltmp;
+    celltmp->poids = p;
+  }
 }
 
 /* Ajouter un noeud dans le réseau si il n'existe pas, */
@@ -57,45 +80,44 @@ Noeud* ajouterNoeud(Reseau *res, Tas *tas, int i)
 
 void ajoutSteiner(Reseau *st, Tas *tas, int deb, int arr) 
 {
-  Noeud *n, *nPrec;
+  Noeud *nDeb, *nArr, *nPrec;
   int i;
-  float p;
-  CellNoeud *celltmp1 = NULL;
-  CellNoeud *celltmp2 = NULL;
+  double p;
 
   /* rechercher le noeud arr dans st, si noeud n'existe pas, l'ajouter */
-  n = ajouterNoeud(st, tas, arr);
+  nArr = ajouterNoeud(st, tas, arr);
 
   /* rechercher le noeud deb dans st, si noeud n'existe pas, l'ajouter */
-  n = ajouterNoeud(st, tas, deb);
+  nDeb = ajouterNoeud(st, tas, deb);
 
-  printf("Ajout Steiner : %d %d.\n", deb, arr);
+#ifdef DEBUG
+  printf("Ajout Steiner : %d -> %d.\n", deb, arr);
+#endif
 
   /* Pour tous les noeuds n de arr vers deb */
   i = deb;
 
   /* Rechercher le noeud n dans st, si Noeud n'existe pas l'ajouter */
-  while( tas->val[i]->precedent != -1 ) {
+  while( i != -1 ) {
+#ifdef DEBUG
     printf("Ajout steiner : %d(%d) -> %d\n", tas->val[i]->noeud->num, tas->val[i]->precedent, i);
-    /* rechercher le noeud deb dans st, si noeud n'existe pas, l'ajouter */
-    nPrec = ajouterNoeud(st, tas, tas->val[i]->precedent);
+#endif
 
-    p = trouvePoids(tas->val[i]->noeud, tas->val[tas->val[i]->precedent]->noeud);
+    if(tas->val[i]->precedent != -1) {
+      /* rechercher le noeud deb dans st, si noeud n'existe pas, l'ajouter */
+      nPrec = ajouterNoeud(st, tas, tas->val[i]->precedent);
+      p = trouvePoids(tas->val[i]->noeud, tas->val[tas->val[i]->precedent]->noeud);
+    }      
+    else {
+      /* C'est le dernier noeud */
+      nPrec = nArr;
+      p = trouvePoids(tas->val[i]->noeud, nArr);
+    }
 
-    //Chainage du voisin du noeud 1
-    celltmp1 =creerlistenoeud();
-    celltmp1->cour = n;
-    celltmp1->suiv = nPrec->voisins;
-    nPrec->voisins = celltmp1;
-    celltmp1->poids = p;
-    
-    //Chainage du voisin du noeud 2
-    celltmp2 =creerlistenoeud();
-    celltmp2->cour = nPrec;
-    celltmp2->suiv = n->voisins;
-    n->voisins = celltmp2;
-    celltmp2->poids = p;
+    ajoutVoisin(nDeb,nPrec, p);
+    ajoutVoisin(nPrec,nDeb, p);
 
+    nDeb = nPrec;
     i = tas->val[i]->precedent;
   }
 }
@@ -108,6 +130,8 @@ Reseau* steiner(Prim *prim, Reseau *res)
   Tas *tas = NULL;
 
   st = creerReseau();
+  st->nbNoeuds = res->nbNoeuds;
+  st->dep = res->dep;
   
   for(i = 0; i <prim->nbNoeuds; i++) {
     if(prim->pred[i] != -1 ) {
@@ -117,13 +141,12 @@ Reseau* steiner(Prim *prim, Reseau *res)
       /* Initialisation du Tas a partir du reseau res */
       detruireTas(tas);
       tas = initTas(res);
+#ifdef DEBUG
       printf("AV : tas->NbMax : %d, tas->nbNoeud : %d\n", tas->nbMax, tas->nbNoeud);
+#endif
       
       /* Calcul de Dijkstra à partir du noeud i */
       dijkstra(tas, res, nPred);
-
-      printf("nPred : %d, nbNoeud : %d\n", nPred->num, res->nbNoeuds);
-      printf("AP : tas->NbMax : %d, tas->nbNoeud : %d\n", tas->nbMax, tas->nbNoeud);
 
       /* Ajout des noeuds du chemin pred[i] -> i*/
       ajoutSteiner(st, tas, i, prim->pred[i]);

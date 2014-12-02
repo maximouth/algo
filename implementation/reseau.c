@@ -344,7 +344,7 @@ void ecrireReseauDot(Reseau *res, FILE *f)
   }
 
   /* Entete du fichier */
-  fprintf(f,"graph g { \n\trankdir = LR\n\tbgcolor = grey50\n\tsize = \"1500\"\n\n");
+  fprintf(f,"graph g { \n\trankdir = LR\n\tsize = \"1500\"\n\n");
   
   /* Ecriture des coordonnées des noeuds */
   noeuds = res->noeuds;
@@ -372,7 +372,7 @@ void ecrireReseauDot(Reseau *res, FILE *f)
     while (voisin != NULL) {
       if(noeuds->cour->num > voisin->cour->num) {
         /* Afficher les voisins que dans un sens */
-	fprintf(f,"\"myNode%d\" -- \"myNode%d\" [ \tpenwidth = 0.001 \n\t color = red\n\tlabel = \"%f\" ]\n",noeuds->cour->num, voisin->cour->num, voisin->poids );
+	fprintf(f,"\"myNode%d\" -- \"myNode%d\" [ \tpenwidth = 0.001 \n\t color = red\n\tlabel = \"%.03f\" ]\n",noeuds->cour->num, voisin->cour->num, voisin->poids );
       }
 
       /* Passage au voisin suivant */

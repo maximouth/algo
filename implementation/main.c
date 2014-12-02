@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #include "reseau.h"
 #include "tas_dijkstra.h"
@@ -19,6 +20,9 @@ int main(int argc, char *argv[]) {
   Tas *tas;
   Prim *resPrim;
   char *nomFic;
+
+  clock_t tmp_initial;
+  clock_t tmp_final;
 
 #ifdef DEBUG
   int i;
@@ -97,9 +101,11 @@ int main(int argc, char *argv[]) {
   tas = initTas(res);
   printf("Initialisation du tas terminée.\n");
 
+  tmp_initial = clock();
   // Appel de Prim sur le noeud de départ
   resPrim = prim(tas, res, res->dep); 
-  printf("Calcul Prim terminé.\n");
+  tmp_final= clock();
+  printf("Calcul Prim terminé en %f\n",((double)(tmp_final - tmp_initial)/CLOCKS_PER_SEC) );
 
   printf("Poids arbre : %.03f\n", calculPoids(resPrim, res));
 
@@ -173,6 +179,18 @@ int main(int argc, char *argv[]) {
 
   ecrireReseauDot(st, f); 
   fclose(f);
+
+   //initialisation du tas à partir des noeuds du reseau
+  detruireTas(tas);
+  tas = initTas(st);
+
+  printf("Initialisation du tas terminée.\n");
+ 
+  resPrim = prim(tas, st, st->dep); 
+  printf("Calcul Prim graphe distance terminé.\n");
+
+  printf("Poids arbre : %.03f\n", calculPoids(resPrim, st));
+
 
   return 0;
 }
