@@ -61,7 +61,7 @@ Tas *initTas(Reseau *res)
 {
   Tas *tas;
   CellNoeud *n = NULL;
-  Elem *e;
+  Elem *el;
 
   //creer un tas de la taille du reseau
   tas = initialiser(res->nbNoeuds);
@@ -70,9 +70,10 @@ Tas *initTas(Reseau *res)
   n = res->noeuds;
 
   while(n != NULL) {
-    e = creerElem();
-    remplirElem(e, n->cour, -1, FLT_MAX);
-    ajouter(tas, e);
+    el = creerElem();
+    remplirElem(el, n->cour, -1, FLT_MAX);
+
+    ajouter(tas, el);
     n = n->suiv;
   }
 
@@ -112,7 +113,7 @@ void ajouter( Tas *t, Elem *el)
   int i = 0;
   int p = 0;
   int s = 0;
-
+    
   if(t->nbNoeud == t->nbMax) {
     printf("Tas plein");
     return;
@@ -167,7 +168,7 @@ Elem *recup_min(Tas *tas)
   }
   else {
     e = tas->val[tas->tas[0]];
-    supprime(tas, e->numero);
+    supprimer(tas, e);
   }
 
   return e;
@@ -179,9 +180,10 @@ Elem *rechercher(Tas *t, int idx)
 }
 
 
-void supprime(Tas *t, int idx) { 
+void supprimer(Tas *t, Elem *el) { 
   int i = 0;
   int j, d, g, s;
+  int idx = el->numero;
 
   if(t->val[idx] == NULL) {
 #ifdef DEBUG

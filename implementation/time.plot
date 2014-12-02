@@ -1,8 +1,7 @@
-plot '<sort -g -k3 time.csv' u 3:8 w l
-replot '<sort -g -k4 time.csv' u 4:8 w l
+plot '<sort -g -k1 time.csv' u 1:8 w l
 
 set term png
-set xlabel "titi"
+set xlabel "Nodes"
 set ylabel "Time"
 
 set output "time.png"

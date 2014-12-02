@@ -98,10 +98,10 @@ int main(int argc, char *argv[]) {
 
   //initialisation du tas à partir des noeuds du reseau
   detruireTas(tas);
-  tas = initTas(res);
-  printf("Initialisation du tas terminée.\n");
-
   tmp_initial = clock();
+  tas = initTas(res);
+  //printf("Initialisation du tas terminée.\n");
+
   // Appel de Prim sur le noeud de départ
   resPrim = prim(tas, res, res->dep); 
   tmp_final= clock();
