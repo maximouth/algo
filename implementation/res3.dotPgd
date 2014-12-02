@@ -1,39 +1,41 @@
 graph g { 
 	rankdir = LR
+	bgcolor = grey50
+	size = "1500"
 
 	myNode3 [
-	label = "d"
+	label = "3"
 	color = blue
 	pos = "100,200"
 	]
 
 	myNode2 [
-	label = "c"
+	label = "2"
 	color = blue
 	pos = "100,0"
 	]
 
 	myNode1 [
-	label = "b"
+	label = "1"
 	color = blue
 	pos = "200,100"
 	]
 
 	myNode0 [
-	label = "a"
+	label = "0"
 	color = blue
 	pos = "0,100"
 	]
 
 
-"myNode1" -- "myNode2" [ 	penwidth = 0.04 
+"myNode1" -- "myNode2" [ 	penwidth = 0.001 
 	 color = red
-	label = "3.0" ]
-"myNode2" -- "myNode0" [ 	penwidth = 0.04 
+	label = "3.000000" ]
+"myNode2" -- "myNode0" [ 	penwidth = 0.001 
 	 color = red
-	label = "3.0" ]
-"myNode3" -- "myNode0" [ 	penwidth = 0.04 
+	label = "3.000000" ]
+"myNode3" -- "myNode0" [ 	penwidth = 0.001 
 	 color = red
-	label = "3.0" ]
+	label = "3.000000" ]
 
 }
