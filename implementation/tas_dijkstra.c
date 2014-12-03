@@ -73,7 +73,7 @@ Tas *initTas(Reseau *res)
     el = creerElem();
     remplirElem(el, n->cour, -1, FLT_MAX);
 
-    ajouter(tas, el);
+    ajouter(tas, el, FLT_MAX);
     n = n->suiv;
   }
 
@@ -104,11 +104,11 @@ void remplirElem(Elem *el, Noeud *n, int precedent, double poids) {
 
 int compare(Tas *t, int i, int p)
 {
-  return (t->val[t->tas[i]]->poids < t->val[t->tas[p]]->poids);
+  return (t->val[t->tas[i]]->poids <= t->val[t->tas[p]]->poids);
 }
 
 /* inserer un nouvel element dans le tas en le placant a la derniere position et en le faisant remonter */
-void ajouter( Tas *t, Elem *el) 
+void ajouter( Tas *t, Elem *el, double poids) 
 {
   int i = 0;
   int p = 0;
@@ -118,6 +118,8 @@ void ajouter( Tas *t, Elem *el)
     printf("Tas plein");
     return;
   }
+
+  el->poids = poids;
 
   //inserer l'élément dans le tableau des valeurs 
   t->val[el->numero] = el;

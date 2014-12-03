@@ -1,66 +1,67 @@
 graph g { 
 	rankdir = LR
+	size = "1500"
 
 	myNode5 [
-	label = "f"
+	label = "5"
 	color = green
 	pos = "200,0"
 	]
 
 	myNode4 [
-	label = "e"
+	label = "4"
 	color = green
 	pos = "100,100"
 	]
 
 	myNode3 [
-	label = "d"
+	label = "3"
 	color = blue
 	pos = "100,200"
 	]
 
 	myNode2 [
-	label = "c"
+	label = "2"
 	color = blue
 	pos = "100,0"
 	]
 
 	myNode1 [
-	label = "b"
+	label = "1"
 	color = blue
 	pos = "200,100"
 	]
 
 	myNode0 [
-	label = "a"
+	label = "0"
 	color = blue
 	pos = "0,100"
 	]
 
 
-"myNode5" -- "myNode1" [ 	penwidth = 0.04 
+"myNode5" -- "myNode1" [ 	penwidth = 0.001 
 	 color = red
-	label = "1.0" ]
-"myNode4" -- "myNode3" [ 	penwidth = 0.04 
+	label = "1.000" ]
+"myNode4" -- "myNode3" [ 	penwidth = 0.001 
 	 color = red
-	label = "2.0" ]
-"myNode4" -- "myNode2" [ 	penwidth = 0.04 
+	label = "2.000" ]
+"myNode4" -- "myNode2" [ 	penwidth = 0.001 
 	 color = red
-	label = "1.0" ]
-"myNode4" -- "myNode1" [ 	penwidth = 0.04 
+	label = "1.000" ]
+"myNode4" -- "myNode1" [ 	penwidth = 0.001 
 	 color = red
-	label = "2.0" ]
-"myNode4" -- "myNode0" [ 	penwidth = 0.04 
+	label = "2.000" ]
+"myNode4" -- "myNode0" [ 	penwidth = 0.001 
 	 color = red
-	label = "2.0" ]
-"myNode3" -- "myNode1" [ 	penwidth = 0.04 
+	label = "2.000" ]
+"myNode3" -- "myNode1" [ 	penwidth = 0.001 
 	 color = red
-	label = "3.0" ]
-"myNode3" -- "myNode0" [ 	penwidth = 0.04 
+	label = "3.000" ]
+"myNode3" -- "myNode0" [ 	penwidth = 0.001 
 	 color = red
-	label = "3.0" ]
-"myNode2" -- "myNode0" [ 	penwidth = 0.04 
+	label = "3.000" ]
+"myNode2" -- "myNode0" [ 	penwidth = 0.001 
 	 color = red
-	label = "5.0" ]
+	label = "5.000" ]
 
 }

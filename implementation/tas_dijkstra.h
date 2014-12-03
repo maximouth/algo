@@ -25,7 +25,7 @@ typedef struct tas {
 
 Tas *initialiser(int taille);
 int est_vide(Tas *t);
-void ajouter(Tas *t, Elem *el);
+void ajouter(Tas *t, Elem *el, double poids);
 void supprimer(Tas *t, Elem *el);
 Elem *recup_min(Tas *t);
 

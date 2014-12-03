@@ -77,7 +77,7 @@ Prim* prim(Tas *tas, Reseau *res, Noeud *deb)
 double calculPoids(Prim *prim, Reseau *res)
 {
   int i;
-  double p;
+  double p = 0.0;
 
   for(i = 0; i< res->nbNoeuds; i++) {
     if(prim->pred[i] != -1) {
